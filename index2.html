@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Biking Weather App</title>
+        <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+        <link rel="stylesheet" href="./main.css">
+    </head>
+    <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+        
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary"> 
+                <a class="navbar-brand" href="#">Pimp My (Bike) Ride</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">   
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./index2.html">Forecast</a>
+                        </li>
+                    </ul>
+                </div>  
+            </nav>
+        </header>
+
+        <main>
+            <div class="d-flex flex-row">    
+                <div class="card mb-3" style="width: 33.33%;">
+                    <h3 class="card-header">INSTRUCTIONS</h3>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Quick Instructions</strong></p>
+                        <p>Pick start location and time THEN  <br> end location and time (using <br> military time).</p>
+                        <p>Please make sure to type the city <br> and state in the exact formatting <br> the examples show.</p>
+                            <a href="#" data-toggle="tooltip" title="Pick a spot near the midpoint of your ride and use that as your endpoint.">(Start & End Points the Same?)</a> 
+                    </div>
+                </div> 
+                <div class="card mb-3" style="width: 33.33%;">
+                    <h3 class="card-header">ROUTE & TIMES</h3>
+                    <ul class="list-group list-group-flush">
+                        <form class="form">
+                            <div class="form-group">
+                                <label for="search">Starting City</label>
+                                <input type="text" class="form-control" id="start-city"  name="search" placeholder="Denver">
+                                <label for="search">Starting State</label>
+                                <input type="text" class="form-control" id="start-state" name="search" placeholder="CO">
+                                <label for="search">Starting ZipCode</label>
+                                <input type="text" class="form-control" id="start-zip" name="search" placeholder="80210">
+                                <div class="card-header"></div>
+                                <select class="custom-select options" id="start-time">
+                                    <option selected="">Pick Start Time (REQUIRED)</option>       
+                                </select>
+                                <div class="card-header"></div>
+                                   
+                                <label for="search">Ending City</label>
+                                <input type="text" class="form-control" id="end-city" name="search" placeholder="Denver">
+                                <label for="search">Ending State</label>
+                                <input type="text" class="form-control" id="end-state" name="search" placeholder="CO">
+                                <label for="search">Ending ZipCode</label>
+                                <input type="text" class="form-control" id="end-zip" name="search" placeholder="80202">
+                                <div class="card-header"></div>
+                                <select class="custom-select options" id="end-time">
+                                    <option selected="">Pick End Time (REQUIRED)</option>      
+                                </select>
+                                <div class="card-header"></div>
+                            </div>
+                            <button id="submit-button" type="submit" class="btn btn-success btn-lg btn-block">
+                                Search
+                            </button>
+                        </form>
+                    </ul>
+                </div>
+                <div class="card mb-3" style="width: 33.33%;">
+                    <h3 class="card-header">WEATHER</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Start of Route Weather</strong></li>
+                        <section id="results-start-weather">
+                            <ul class="list-group list-group-flush">
+                                <h5><u>Sunny/Cloudy</u></h5>
+                                <p id='cloudiness'></p>
+                                <h5><u>Chance of Precipitation at Start</u></h5>
+                                <p id='raininess'></p>
+                                <h5><u>Temperature</u></h5>
+                                <p id='temp'></p>
+                                <h5><u>Wind Chill</u></h5>
+                                <p id='windiness'></p>
+                            </ul>
+                        </section>
+                        <li class="list-group-item"><strong>End of Route Weather</strong></li>
+                        <section id="results-end-weather">
+                            <ul class="list-group list-group-flush">
+                                <h5><u>Sunny/Cloudy</u></h5>
+                                <p id='end-cloudiness'></p>
+                                <h5><u>Chance of Precipitation at End</u></h5>
+                                <p id='end-raininess'></p>
+                                <h5><u>Temperature</u></h5>
+                                <p id='end-temp'></p>
+                                <h5><u>Wind Chill</u></h5>
+                                <p id='end-windiness'></p>
+                            </ul>
+                        </section>
+                    </ul>
+                </div>
+            </div>            
+        </main> 
+
+        <footer>
+            <div class="list-group">
+                <a href="https://www.wunderground.com/" class="list-group-item list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><strong>Source</strong></h5>
+                    </div>
+                        <p class="mb-1">Weather Underground</p>
+                </a> 
+            </div>
+        </footer>
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
+        <script src="refactored-events.js" charset="utf-8"></script>
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip(); 
+            });
+        </script>
+    </body>
+</html>
